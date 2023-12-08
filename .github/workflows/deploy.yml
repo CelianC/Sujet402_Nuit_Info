@@ -24,7 +24,7 @@ jobs:
       - name: Configure clasp with Service Account
         run: |
           echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" > service-account-key.json
-          npx @google/clasp login --oauth2 --json service-account-key.json
+          npx @google/clasp login --json service-account-key.json
           npx @google/clasp status
 
       - name: Push to Google Apps Script
