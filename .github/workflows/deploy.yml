@@ -18,13 +18,17 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies
-        run: npm install -g @google/clasp
-
-      - name: Configure clasp
+      - name: Decrypt Service Account Key
         run: |
-          echo "machine github.com login ${{ secrets.GITHUB_TOKEN }}" > ~/.netrc
-          clasp login
+          echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" > service-account-key.json
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.GPG_PASSPHRASE }}" --output service-account-key.json.gpg service-account-key.json
+          gpg --version
+          gpg --import service-account-key.json.gpg
+
+      - name: Configure clasp with Service Account
+        run: |
+          clasp login --oauth2 --json service-account-key.json
+          clasp status
 
       - name: Push to Google Apps Script
         run: clasp push -f
