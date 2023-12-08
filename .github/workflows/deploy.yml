@@ -21,9 +21,6 @@ jobs:
       - name: Decrypt Service Account Key
         run: |
           echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" > service-account-key.json
-          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.GPG_PASSPHRASE }}" --output service-account-key.json.gpg service-account-key.json
-          gpg --version
-          gpg --import service-account-key.json.gpg
 
       - name: Configure clasp with Service Account
         run: |
