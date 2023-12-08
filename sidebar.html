@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+  <!-- The CSS package above applies Google styling to buttons and other elements. -->
+
+  <style>
+    .branding-below {
+      bottom: 56px;
+      top: 0;
+    }
+    .branding-text {
+      left: 7px;
+      position: relative;
+      top: 3px;
+    }
+    .col-contain {
+      overflow: hidden;
+    }
+    .col-one {
+      float: left;
+      width: 50%;
+    }
+    .logo {
+      vertical-align: middle;
+    }
+    .radio-spacer {
+      height: 20px;
+    }
+    .width-100 {
+      width: 100%;
+    }
+    .found-keys {
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+  <title></title>
+</head>
+<body>
+<div class="sidebar branding-below">
+  <form>
+    <div class="block" id="button-bar">
+      <button class="blue" id="run-remplacement">replace</button>
+    </div>
+    <div class="found-keys" id="found-keys-container">
+      <table id="keys-table">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody id="keys-table-body"></tbody>
+      </table>
+    </div>
+  </form>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  $(function() {
+    $('#run-remplacement').click(runReplacement);
+  });
+
+  function runReplacement() {
+    this.disabled = true;
+    google.script.run
+      .withSuccessHandler(function (keys, element) {
+        element.disabled = false;
+
+        // Clear previous found keys
+        $('#keys-table-body').empty();
+
+        // Count occurrences of each key
+        var keyCounts = {};
+        keys.forEach(function (key) {
+          keyCounts[key] = (keyCounts[key] || 0) + 1;
+        });
+
+        // Add the list of found keys and their counts to the HTML table
+        for (var key in keyCounts) {
+          if (keyCounts.hasOwnProperty(key)) {
+            var row = $('<tr>');
+            row.append($('<td>').text(key));
+            row.append($('<td>').text(keyCounts[key]));
+            $('#keys-table-body').append(row);
+          }
+        }
+      })
+      .withFailureHandler(function (msg, element) {
+        showError(msg, $('#button-bar'));
+        element.disabled = false;
+      })
+      .withUserObject(this)
+      .findKeysInDocument();
+  }
+
+  function showError(msg, element) {
+    const div = $('<div id="error" class="error">' + msg + '</div>');
+    $(element).after(div);
+  }
+</script>
+</body>
+</html>
