@@ -18,14 +18,14 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Decrypt Service Account Key
-        run: |
-          echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" > service-account-key.json
+      - name: Install clasp
+        run: npm install -g @google/clasp
 
       - name: Configure clasp with Service Account
         run: |
-          clasp login --oauth2 --json service-account-key.json
-          clasp status
+          echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" > service-account-key.json
+          npx @google/clasp login --oauth2 --json service-account-key.json
+          npx @google/clasp status
 
       - name: Push to Google Apps Script
-        run: clasp push -f
+        run: npx @google/clasp push -f
