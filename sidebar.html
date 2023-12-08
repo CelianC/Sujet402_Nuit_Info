@@ -68,10 +68,10 @@
   <div class="sidebar branding-below">
     <form>
       <div class="block" id="button-bar">
-        <button class="blue" id="run-remplacement">replace</button>
+        <button class="blue" id="run-remplacement">Replace keys by hyperlink</button>
       </div>
       <div class="found-keys" id="found-keys-container">
-        <table id="keys-table">
+        <table id="keys-table" style="display: none;">
           <thead>
             <tr>
               <th>Key</th>
@@ -112,6 +112,10 @@
           keys.forEach(function (key) {
             keyCounts[key] = (keyCounts[key] || 0) + 1;
           });
+          
+          // Show the HTML table if keys were found
+
+          $('#keys-table').css('display', keys.length > 0 ? 'table' : 'none');
 
           // Add the list of found keys and their counts to the HTML table
           for (var key in keyCounts) {
