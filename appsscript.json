@@ -1,0 +1,10 @@
+{
+  "timeZone": "Europe/Paris",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "urlFetchWhitelist": [
+    "https://ww1.requirementyogi.cloud/nuitdelinfo/search"
+  ]
+}

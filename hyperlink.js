@@ -37,7 +37,6 @@ function onOpen(e) {
  */
 function onInstall(e) {
   onOpen(e);
-  findKeysInDocument();
 }
 
 /**
@@ -53,6 +52,14 @@ function showSidebar() {
 
 
 
+/**
+ * Fetches data from a specific URL and extracts keys, URLs, and texts from the results.
+ * 
+ * @returns {Object} An object containing three properties:
+ * - keys: An array of keys extracted from the results.
+ * - urls: An array of URLs extracted from the results.
+ * - texts: An array of texts extracted from the results.
+ */
 function getAllKeys() {
   var url = 'https://ww1.requirementyogi.cloud/nuitdelinfo/search';
   var response = UrlFetchApp.fetch(url, { 'muteHttpExceptions': true });
@@ -69,8 +76,14 @@ function getAllKeys() {
   return { keys: keys, urls: urls , texts: texts};
 }
 
-
-
+/**
+ * Searches for specific keys in the active Google Document and replaces them with hyperlinks.
+ * The keys and corresponding URLs are fetched from the `getAllKeys` function.
+ * 
+ * @returns {Array} An array of keys that were found and replaced in the document.
+ * If there is a mismatch between the number of keys and URLs, or if no keys are found, 
+ * the function logs an error message and returns an empty array.
+ */
 function findKeysInDocument() {
   var body = DocumentApp.getActiveDocument().getBody();
   var keyValuePairs = getAllKeys();
