@@ -2,6 +2,16 @@
 
 ## Le défi: Découvrir la création d’add-on Google Docs (by Requirement Yogi)
 
+### Si vous faites un add-on Google Docs, intégré à la toolbar, aux menus ou au document, qui effectue cette transformation, vous avez réussi le défi
+
+Remplace les keys dans le docs en cliquant sur le bouton dans la sidebar.
+
+### Bonus niveau 1 : Faire un tableau récapitulatif des clés de requis en bas de page
+
+Tableau récapitulatif des clés trouvées dans le document dans la sidebar après avoir remplacé les keys dans le document.
+
+### Bonus niveau 3 : Si vous écrivez le code dans Git et que vous mettez en place un déploiement automatique vers Google Docs. Par défaut, Google Docs vous propose d'écrire le code dans leur IDE en ligne (Apps Script), il faut trouver un moyen d'écrire le code dans Git et de ne pas avoir besoin de toucher à leur IDE en ligne
+
 Configurer votre environnement de développement :
 
 Utilisez votre éditeur de code préféré (par exemple, Visual Studio Code, Sublime Text) psour écrire votre code et utilisez Git pour la gestion de version.
