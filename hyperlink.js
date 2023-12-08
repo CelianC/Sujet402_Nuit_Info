@@ -20,8 +20,8 @@
 
 function onOpen(e) {
   DocumentApp.getUi().createAddonMenu()
-      .addItem('Start', 'showSidebar')
-      .addToUi();
+    .addItem('Start', 'showSidebar')
+    .addToUi();
 }
 
 /**
@@ -46,7 +46,7 @@ function onInstall(e) {
  */
 function showSidebar() {
   const ui = HtmlService.createHtmlOutputFromFile('sidebar')
-      .setTitle('Yogi requirement');
+    .setTitle('Yogi requirement');
   DocumentApp.getUi().showSidebar(ui);
 }
 
@@ -73,7 +73,7 @@ function getAllKeys() {
     urls.push(data.results[i].canonicalUrl);
     texts.push(data.results[i].text);
   }
-  return { keys: keys, urls: urls , texts: texts};
+  return { keys: keys, urls: urls, texts: texts };
 }
 
 /**
